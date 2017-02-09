@@ -1,0 +1,22 @@
+{
+    "name" : "juistdit/manta-php-sdk",
+    "description" : "An SDK allowing brands/suppliers to communicate with mantagifts",
+    "keywords" : ["manta", "sdk"],
+    "type" :  "library",
+    "homepage" : "https://github.com/juistdit/manta-php-sdk",
+    "license" : "MIT",
+    "authors" : [
+        {
+                "name" : "JuistdIT",
+                "homepage" : "https://github.com/juistdit/manta-php-sdk/contributors"
+        }
+    ],
+    "require" {
+         "php": "^7.0",
+    },	
+    "autoload": {
+        "psr-4" : {
+            "Manta\\" : "src/Manta"
+        }
+    }
+}
