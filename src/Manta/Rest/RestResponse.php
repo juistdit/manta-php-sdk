@@ -8,7 +8,7 @@
 
 namespace Manta\Rest;
 
-use Manta\Exceptions\MantaApiException;
+use Manta\Exceptions\ApiException;
 
 abstract class RestResponse
 {
