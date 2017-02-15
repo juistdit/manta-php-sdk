@@ -6,10 +6,10 @@
  * Time: 12:37
  */
 
-namespace Manta\Http\Clients;
+namespace Manta\Rest\Json\Clients;
 
 
-abstract class AbstractClient implements HttpClientInterface
+abstract class AbstractClient implements JsonClientInterface
 {
 
     abstract protected function sendRequest(string $method, string $url, array $headers = [], array $data = null);

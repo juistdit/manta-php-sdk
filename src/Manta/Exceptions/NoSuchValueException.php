@@ -6,7 +6,7 @@
  * Time: 13:04
  */
 namespace Manta\Exceptions;
-
-class NoSuchValueException extends \Exception {
+// not used yet... maybe remove
+class NoSuchValueException extends NoAccessException {
 
 }

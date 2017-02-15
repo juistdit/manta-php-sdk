@@ -11,8 +11,8 @@
                 "homepage" : "https://github.com/juistdit/manta-php-sdk/contributors"
         }
     ],
-    "require" {
-         "php": "^7.0",
+    "require" : {
+         "php": "^7.0"
     },	
     "autoload": {
         "psr-4" : {

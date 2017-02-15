@@ -6,7 +6,7 @@ class Sdk {
 
     const VERSION = '0.0-dev';
     const API_URL = '';
-    const HTTP_CLIENT = '\Manta\Http\Clients\CurlClient';
+    const HTTP_CLIENT = '\Manta\Rest\Json\Clients\CurlClient';
 
     private $_config;
     private $_apiClient;
@@ -16,13 +16,18 @@ class Sdk {
             'api_url' => static::API_URL,
             'http_client' => static::HTTP_CLIENT
         ], $config);
-        $clientClass = $config['http_client'];
+        $clientClass = $this->_config['http_client'];
         $this->_apiClient = new $clientClass($this->_config['api_url']);
     }
 
     public function login(string $username, string $password){
         //retrieve the token
-        $token = "";
+        $api = $this->_apiClient;
+        $response = $api->POST('integration/customer/token', ['username'=>$username, 'password'=>$password]);
+        if($response->isError()){
+            throw $response->asException();
+        }
+        $token = $response->body;
         return new Session($this->_apiClient, $token);
     }
 }
