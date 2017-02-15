@@ -1,2 +1,4 @@
+test/config.php
 vendor/
 composer.lock
+idea/

@@ -21,7 +21,7 @@ $sdk = new Sdk($config);
 
 echo "Logging in with wrong credentials.", PHP_EOL;
 try {
-    $sdk->login("Gebruikersnaam", "bestaat niet");
+    $sdk->login("Username", "doesn't exist");
 } catch (\Manta\Exceptions\AuthorizationException $e){
     echo $e;
 }
