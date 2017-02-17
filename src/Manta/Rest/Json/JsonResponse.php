@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kay
- * Date: 09-02-17
- * Time: 13:23
- */
+declare(strict_types=1);
 
 namespace Manta\Rest\Json;
 

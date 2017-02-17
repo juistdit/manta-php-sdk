@@ -18,5 +18,8 @@
         "psr-4" : {
             "Manta\\" : "src/Manta"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
     }
 }

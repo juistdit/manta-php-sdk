@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Manta\DataObjects;
 /**
@@ -19,4 +20,5 @@ class Company
             $this->$key = $value;
         }
     }
+
 }

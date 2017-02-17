@@ -1,0 +1,19 @@
+<phpunit
+        colors="true"
+        stderr="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        stopOnFailure="false"
+        bootstrap="tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="Manta PHP SDK Test Suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/Manta</directory>
+        </whitelist>
+    </filter>
+</phpunit>

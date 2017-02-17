@@ -5,7 +5,6 @@
  * Date: 15-02-17
  * Time: 12:10
  */
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Manta\Sdk;

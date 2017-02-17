@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kay
- * Date: 09-02-17
- * Time: 13:04
- */
+declare(strict_types=1);
+
 namespace Manta\Exceptions;
 // not used yet... maybe remove
 class NoSuchValueException extends NoAccessException {

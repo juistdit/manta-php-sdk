@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kay
- * Date: 10-02-17
- * Time: 09:29
- */
+declare(strict_types=1);
 
 namespace Manta\Rest;
 
