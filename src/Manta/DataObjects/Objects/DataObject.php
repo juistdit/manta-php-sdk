@@ -1,16 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Manta\DataObjects;
-/**
- * Created by PhpStorm.
- * User: kay
- * Date: 09-02-17
- * Time: 13:02
- */
-class Company
+namespace Manta\DataObjects\Objects;
+
+
+abstract class DataObject
 {
-    public function __construct($data){
+    public function __construct ($data) {
         //small stub
         //we will maybe do this using getters and setters
 
@@ -20,5 +16,4 @@ class Company
             $this->$key = $value;
         }
     }
-
 }

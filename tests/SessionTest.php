@@ -52,7 +52,7 @@ class SessionTest extends TestCase
 
         try {
             $company = $session->getCompany($this->_config['company_accessible']);
-            $this->assertInstanceOf(\Manta\DataObjects\Company::class, $company);
+            $this->assertInstanceOf(\Manta\DataObjects\Objects\Company::class, $company);
             $this->assertEquals($company->shop_name, "Testcompany1");
         } catch (\Manta\Exceptions\NoAccessException $e) {
             $this->fail(sprintf("Failed logging in with username %s and password %s on api %s.",
@@ -66,7 +66,7 @@ class SessionTest extends TestCase
         $count = 0;
         foreach($companies as $company){
             $count++;
-            $this->assertInstanceOf(\Manta\DataObjects\Company::class, $company);
+            $this->assertInstanceOf(\Manta\DataObjects\Objects\Company::class, $company);
             $this->assertInternalType('string', $company->shop_name);
         }
         if($count === 0){

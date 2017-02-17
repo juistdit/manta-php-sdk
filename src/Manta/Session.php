@@ -5,7 +5,7 @@ namespace Manta;
 
 
 use Manta\Exceptions\MantaApiException;
-use Manta\DataObjects\Company;
+use Manta\DataObjects\Objects\Company;
 use Manta\Exceptions\MantaApiExceptionFactory;
 use Manta\Rest\Json\Clients\JsonClientInterface;
 
