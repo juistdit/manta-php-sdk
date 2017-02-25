@@ -6,7 +6,7 @@ namespace Manta\Rest\Json\Clients;
 use Manta\Rest\Json\JsonResponse;
 use Manta\Exceptions\RestException;
 
-class CurlClient extends AbstractClient implements JsonClientInterface
+class CurlClient extends AbstractClient
 {
 
     private $_curl;

@@ -4,20 +4,23 @@ declare(strict_types=1);
 namespace Manta\Rest\Json\Clients;
 
 
-abstract class AbstractClient implements JsonClientInterface
+use Manta\Rest\Json\JsonResponse;
+use Manta\Rest\RestClientInterface;
+
+abstract class AbstractClient implements RestClientInterface
 {
 
     abstract protected function sendRequest(string $method, string $url, array $headers = [], array $data = null);
 
-    public function GET($url, $headers = []){
+    public function GET($url, $headers = []) {
         return $this->sendRequest('GET', $url, $headers);
     }
 
-    public function PATCH($url, $data, $headers = []){
+    public function PATCH($url, $data, $headers = []) {
         return $this->sendRequest('PATCH', $url, $headers, $data);
     }
 
-    public function POST($url, $data, $headers = []){
+    public function POST($url, $data, $headers = []) {
         return $this->sendRequest('POST', $url, $headers, $data);
     }
 

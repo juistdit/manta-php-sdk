@@ -7,6 +7,9 @@ use Manta\Rest\RestResponse;
 
 abstract class QuerySet implements \Iterator {
 
+    /**
+     * @var \Manta\Rest\JsonClientInterface
+     */
     protected $_apiClient;
     protected $_resource;
     protected $_token;
@@ -24,34 +27,39 @@ abstract class QuerySet implements \Iterator {
 
     private function _ensureGenerator() {
         if($this->_generator === null) {
-            $this->_generator = $this->_generator();
+            $this->_generator = $this->_generatorNoArgs();
+        }
+    }
+
+    private function _generatorNoArgs() {
+        $arrayQueryFilters = array_filter($this->_queryFilters, 'is_array');
+        $stringQueryFilters = array_filter($this->_queryFilters, 'is_string');
+        if(count($arrayQueryFilters) > 0) {
+            return $this->_generatorArraysAndStrings($arrayQueryFilters, $stringQueryFilters);
+        } else {
+            return $this->_generatorStrings($stringQueryFilters);
         }
     }
 
     //returns a generator
-    private function _generator(array $arrayQueryFilters = null, array $stringQueryFilters = null){
-        if($arrayQueryFilters === null) {
-            $arrayQueryFilters = array_filter('is_array', $this->_queryFilters);
-            $stringQueryFilters = array_filter('is_string', $this->_queryFilters);
-            return $this->_generator($arrayQueryFilters, $stringQueryFilters);
-        }
-        if(count($arrayQueryFilters) > 0) {
-            $allFilter = end($arrayQueryFilters);
-            $key = key($arrayQueryFilters);
-            array_pop($arrayQueryFilters);
-            foreach($allFilter as $value){
-                $dataObjects = $this->_generator($arrayQueryFilters, array_merge($stringQueryFilters, [$key => $value]));
-                //or yield from:
-                foreach($dataObjects as $dataObject) {
-                    yield $dataObject;
-                }
+    private function _generatorArraysAndStrings(array $arrayQueryFilters = null, array $stringQueryFilters = null){
+        $allFilter = end($arrayQueryFilters);
+        $key = key($arrayQueryFilters);
+        array_pop($arrayQueryFilters);
+        foreach($allFilter as $value){
+            if(count($arrayQueryFilters) > 0){
+                $dataObjects = $this->_generatorArraysAndStrings($arrayQueryFilters, array_merge($stringQueryFilters, [$key => $value]));
+            } else {
+                $dataObjects = $this->_generatorStrings($stringQueryFilters);
             }
-        } else {
-            return $this->_generateFromArgs($stringQueryFilters);
+            //or yield from:
+            foreach($dataObjects as $dataObject) {
+                yield $dataObject;
+            }
         }
     }
 
-    private function _generateFromArgs(array $args) {
+    private function _generatorStrings(array $args) {
         //todo implement with range.
         $api = $this->_apiClient;
         $token = $this->_token;

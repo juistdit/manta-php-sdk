@@ -12,7 +12,7 @@ use Manta\Session;
  * Date: 17-02-17
  * Time: 09:02
  */
-class SessionTest extends TestCase
+class CompaniesTest extends TestCase
 {
 
     private $_config;
@@ -55,8 +55,8 @@ class SessionTest extends TestCase
             $this->assertInstanceOf(\Manta\DataObjects\Objects\Company::class, $company);
             $this->assertEquals($company->shop_name, "Testcompany1");
         } catch (\Manta\Exceptions\NoAccessException $e) {
-            $this->fail(sprintf("Failed logging in with username %s and password %s on api %s.",
-                $this->_config['api_url'], $this->_config['username'], $this->_config['password']));
+            $this->fail(sprintf("Failed requesting company with company id %s with username %s on api %s.",
+                $this->_config['company_accessible'], $this->_config['username'], $this->_config['api_url']));
         }
     }
 
@@ -64,13 +64,19 @@ class SessionTest extends TestCase
         $session = $this->_session;
         $companies = $session->getCompanies();
         $count = 0;
+        $accessible_found = false;
         foreach($companies as $company){
             $count++;
             $this->assertInstanceOf(\Manta\DataObjects\Objects\Company::class, $company);
             $this->assertInternalType('string', $company->shop_name);
+            if($company->id === $this->_config['company_accessible']) {
+                $accessible_found = true;
+            }
         }
         if($count === 0){
             $this->fail("Expected atleast one company to be returned for the current brand.");
+        } else if(!$accessible_found) {
+            $this->fail(sprintf("Expected company id %s to be in the returned companies.", $this->_config['company_accessible']));
         }
     }
 }

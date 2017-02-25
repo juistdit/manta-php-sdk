@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Manta;
 
 
-use Manta\Exceptions\MantaApiException;
+use Manta\DataObjects\QuerySets\CompanyQuerySet;
+use Manta\DataObjects\QuerySets\OrderQuerySet;
 use Manta\DataObjects\Objects\Company;
-use Manta\Exceptions\MantaApiExceptionFactory;
-use Manta\Rest\Json\Clients\JsonClientInterface;
+use Manta\Rest\RestClientInterface;
 
 class Session
 {
@@ -16,7 +16,7 @@ class Session
 
     private $_token;
 
-    public function __construct(JsonClientInterface $apiClient, string $token){
+    public function __construct(RestClientInterface $apiClient, string $token){
         $this->_apiClient = $apiClient;
         $this->_token = $token;
     }
@@ -37,12 +37,13 @@ class Session
         $api = $this->_apiClient;
         $token = $this->_token;
         $resource = 'brand/companies';
-        $response = $api->GET($resource, ['Authorization' => "Bearer $token"]);
-        if($response->isError()) {
-            throw $response->asException();
-        }
-        $companies = $response->body['companies'];
-        $companies = array_map(function($c){return new Company($c);}, $companies);
-        return new \IteratorIterator(new \ArrayIterator($companies));
+        return new CompanyQuerySet($api, $resource, $token, []);
+    }
+
+    public function getOrders() {
+        $api = $this->_apiClient;
+        $token = $this->_token;
+        $resource = 'brand/orders';
+        return new OrderQuerySet($api, $resource, $token, []);
     }
 }
