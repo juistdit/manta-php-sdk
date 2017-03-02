@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Manta;
 
 
+use Manta\DataObjects\Objects\Order;
 use Manta\DataObjects\QuerySets\CompanyQuerySet;
 use Manta\DataObjects\QuerySets\OrderQuerySet;
 use Manta\DataObjects\Objects\Company;
@@ -38,6 +39,17 @@ class Session
         $token = $this->_token;
         $resource = 'brand/companies';
         return new CompanyQuerySet($api, $resource, $token, []);
+    }
+
+    public function getOrder($id) {
+        $api = $this->_apiClient;
+        $token = $this->_token;
+        $resource = "brand/orders/$id";
+        $response = $api->GET($resource, ['Authorization' => "Bearer $token"]);
+        if($response->isError()){
+            throw $response->asException();
+        }
+        return new Order($response->body);
     }
 
     public function getOrders() {

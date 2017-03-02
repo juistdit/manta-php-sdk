@@ -33,7 +33,9 @@ abstract class QuerySet implements \Iterator {
 
     private function _generatorNoArgs() {
         $arrayQueryFilters = array_filter($this->_queryFilters, 'is_array');
+
         $stringQueryFilters = array_filter($this->_queryFilters, 'is_string');
+
         if(count($arrayQueryFilters) > 0) {
             return $this->_generatorArraysAndStrings($arrayQueryFilters, $stringQueryFilters);
         } else {
@@ -50,7 +52,7 @@ abstract class QuerySet implements \Iterator {
             if(count($arrayQueryFilters) > 0){
                 $dataObjects = $this->_generatorArraysAndStrings($arrayQueryFilters, array_merge($stringQueryFilters, [$key => $value]));
             } else {
-                $dataObjects = $this->_generatorStrings($stringQueryFilters);
+                $dataObjects = $this->_generatorStrings(array_merge($stringQueryFilters, [$key => $value]));
             }
             //or yield from:
             foreach($dataObjects as $dataObject) {

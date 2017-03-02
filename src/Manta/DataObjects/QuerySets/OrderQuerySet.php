@@ -5,18 +5,33 @@ namespace Manta\DataObjects\QuerySets;
 
 
 use Manta\DataObjects\Objects\Order;
+use Manta\Exceptions\ApiException;
 use Manta\Rest\RestResponse;
 
 class OrderQuerySet extends QuerySet
 {
 
-    const STATUS_VALUES = ['waiting', 'new', 'inprogress', 'inprogressaction', 'complete', 'canceled'];
+    private static $_allowedStatuses = null;
+    public function getAllowedStatuses() {
+        return ['new'];
+        if(self::$_allowedStatuses === null){
+            $response = $this->_apiClient->GET("brand/orders?status=invalid_status", ['Authorization' => "Bearer " . $this->_token]);
+            if($response->isError()){
+                if(preg_match("/Order Status is not valid, allowed are (?P<allowed_statuses>[a-zA-Z, ]*)/", $response->asException()->getMessage(), $output_array)){
+                    self::$_allowedStatuses = array_map('trim', explode(',', $output_array['allowed_statuses']));
+                    return self::$_allowedStatuses;
+                }
+            }
+            throw new ApiException("Couldn't request the allowed statuses");
+        }
+        return self::$_allowedStatuses;
+    }
 
     public function __construct ($apiClient, $resource, $token, $queryFilters) {
         parent::__construct ($apiClient, $resource, $token, $queryFilters);
     }
 
-    public function dateBefore(\DateTime $dt) {
+    /*public function dateBefore(\DateTime $dt) {
         $class = get_class($this);
         return new $class($this->_apiClient, $this->_resource, $this->_token, array_merge($this->_queryFilters, ['end' => $dt->format(DATE_ATOM)]));
 
@@ -25,16 +40,16 @@ class OrderQuerySet extends QuerySet
     public function dateAfter(\DateTime $dt){
         $class = get_class($this);
         return new $class($this->_apiClient, $this->_resource, $this->_token, array_merge($this->_queryFilters, ['start' => $dt->format(DATE_ATOM)]));
-    }
+    }*/
 
     public function statusEqualTo(string $status) {
         return $this->statusIn([$status]);
     }
 
     public function statusNot(string $status) {
-        $list = self::STATUS_VALUES;
-        $list = array_filter(function($s) use($status) { return $s !== $status;}, $list);
-        return $this->statusIn($status);
+        $list = $this->getAllowedStatuses();
+        $list = array_filter($list, function($s) use($status) { return $s !== $status;});
+        return $this->statusIn($list);
     }
 
     public function statusIn(array $status) {
@@ -47,6 +62,6 @@ class OrderQuerySet extends QuerySet
 
     protected function _generateDataObjects(RestResponse $response)
     {
-        return array_map(function($data){return new Order($data);}, $response->body['order']);
+        return array_map(function($data){return new Order($data);}, $response->body['orders']);
     }
 }
