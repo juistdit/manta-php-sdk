@@ -13,12 +13,15 @@ class OrderQuerySet extends QuerySet
 
     private static $_allowedStatuses = null;
     public function getAllowedStatuses() {
-        return ['new'];
+        return ['new', 'invoiced', 'shipped', 'complete', 'canceled'];//TBD use the code below
         if(self::$_allowedStatuses === null){
             $response = $this->_apiClient->GET("brand/orders?status=invalid_status", ['Authorization' => "Bearer " . $this->_token]);
             if($response->isError()){
-                if(preg_match("/Order Status is not valid, allowed are (?P<allowed_statuses>[a-zA-Z, ]*)/", $response->asException()->getMessage(), $output_array)){
+                var_dump($response->body);
+                if(preg_match("/allowed (statuses)? are (?P<allowed_statuses>[a-zA-Z, ]*)/", $response->asException()->getMessage(), $output_array)){
                     self::$_allowedStatuses = array_map('trim', explode(',', $output_array['allowed_statuses']));
+                    var_dump($output_array);
+                    var_dump(self::$_allowedStatuses);
                     return self::$_allowedStatuses;
                 }
             }

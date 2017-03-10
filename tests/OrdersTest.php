@@ -62,7 +62,7 @@ class OrdersTest extends TestCase
         try {
             $order = $session->getOrder($this->_config['order_with_access']);
             $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
-            $this->assertEquals($order->company, "Testcompany1");
+            $this->assertEquals($order->company, "SDK Test company");
         } catch (\Manta\Exceptions\NoAccessException $e) {
             $this->fail(sprintf("Failed requesting order %s with username %s on api %s.",
                 $this->_config['order_with_access'], $this->_config['username'], $this->_config['api_url']));
@@ -103,7 +103,10 @@ class OrdersTest extends TestCase
     public function testAllowedStatuses() {
         $session = $this->_session;
         $allowed_statuses = $session->getOrders()->getAllowedStatuses();
-        foreach(['new', 'invoice', 'shipped', 'complete', 'canceled'] as $status) {
+        //Sprint 8:
+        //foreach(['new', 'invoice', 'shipped', 'complete', 'canceled'] as $status) {
+        //Sprint 7:
+        foreach(['new', 'invoiced', 'shipped', 'complete', 'canceled'] as $status) {
             $this->assertContains($status, $allowed_statuses);
         }
     }
@@ -133,7 +136,7 @@ class OrdersTest extends TestCase
     }
 
     public function testGetOrderStatusNot() {
-        /*
+
         $session = $this->_session;
         $allowed_statuses = $session->getOrders()->getAllowedStatuses();
         foreach($allowed_statuses as $status) {
@@ -154,12 +157,12 @@ class OrdersTest extends TestCase
             if ($count === 0) {
                 $this->fail("Expected atleast one order to be returned for the current brand.");
             }
-        }*/
-        $this->assertTrue(true);
+        }
+        //$this->assertTrue(true);
     }
 
     public function testGetOrderStatusIn() {
-        /*$session = $this->_session;
+        $session = $this->_session;
         $allowed_statuses = $session->getOrders()->getAllowedStatuses();
         foreach($allowed_statuses as $status_1) {
             foreach ($allowed_statuses as $status_2) {
@@ -184,8 +187,8 @@ class OrdersTest extends TestCase
                     $this->fail("Expected atleast one order to be returned for the current brand.");
                 }
             }
-        }*/
-        $this->assertTrue(true);
+        }
+        //$this->assertTrue(true);
     }
 
 }

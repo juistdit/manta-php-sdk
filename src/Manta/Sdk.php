@@ -12,7 +12,7 @@ class Sdk {
     private $_config;
     private $_apiClient;
 
-    public function __construct(array $config) {
+    public function __construct(array $config = []) {
         $this->_config = array_merge([
             'api_url' => static::API_URL,
             'http_client' => static::HTTP_CLIENT

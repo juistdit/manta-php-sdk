@@ -32,7 +32,6 @@ class CurlClient extends AbstractClient
             $headers[] = 'Content-Type: application/json';
             $config[CURLOPT_POSTFIELDS] = json_encode($data);
         }
-
         $url = $this->_api_url . $url;
         //we need to use the + operator: CURLOPT constants are numerical, array_merge renumbers them
         $config = [

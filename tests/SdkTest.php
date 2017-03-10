@@ -28,14 +28,14 @@ class SdkTest extends TestCase
             $this->assertInstanceOf(Session::class, $sdk->login($this->_config['username'], $this->_config['password']));
         } catch (\Manta\Exceptions\AuthorizationException $e){
             $this->fail(sprintf("Failed logging in with username %s and password %s on api %s.",
-                $this->_config['api_url'], $this->_config['username'], $this->_config['password']));
+                $this->_config['username'], $this->_config['password'], $this->_config['api_url']));
         }
         //testing with valid password for the second time
         try {
             $this->assertInstanceOf(Session::class, $sdk->login($this->_config['username'], $this->_config['password']));
         } catch (\Manta\Exceptions\AuthorizationException $e){
             $this->fail(sprintf("Failed logging in two times using the same sdk object with username %s and password %s on api %s.",
-                $this->_config['api_url'], $this->_config['username'], $this->_config['password']));
+                $this->_config['username'], $this->_config['password'], $this->_config['api_url']));
         }
     }
 
