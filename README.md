@@ -14,7 +14,7 @@ composer require juistdit/manta-php-sdk
 ```
 
 ### Phar Archive
-Install by [downloading](https://github.com/juistdit/manta-php-sdk/releases) the latests release and including it:
+Install by [downloading](https://github.com/juistdit/manta-php-sdk/releases) the latest release and including it:
 ```php
 require_once __DIR__ . "/manta-php-sdk.phar";
 ```
