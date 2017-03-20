@@ -1,3 +1,5 @@
+dist/manta-php-sdk.phar
+examples/config.php
 tests/config.php
 vendor/
 composer.lock
