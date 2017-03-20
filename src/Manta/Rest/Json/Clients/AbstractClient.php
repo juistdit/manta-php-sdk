@@ -10,7 +10,7 @@ use Manta\Rest\RestClientInterface;
 abstract class AbstractClient implements RestClientInterface
 {
 
-    abstract protected function sendRequest(string $method, string $url, array $headers = [], array $data = null);
+    abstract protected function sendRequest($method, $url, array $headers = [], array $data = null);
 
     public function GET($url, $headers = []) {
         return $this->sendRequest('GET', $url, $headers);

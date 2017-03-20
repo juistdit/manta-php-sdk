@@ -42,11 +42,11 @@ class OrderQuerySet extends QuerySet
         return new $class($this->_apiClient, $this->_resource, $this->_token, array_merge($this->_queryFilters, ['start' => $dt->format(DATE_ATOM)]));
     }*/
 
-    public function statusEqualTo(string $status) {
+    public function statusEqualTo($status) {
         return $this->statusIn([$status]);
     }
 
-    public function statusNot(string $status) {
+    public function statusNot($status) {
         $list = $this->getAllowedStatuses();
         $list = array_filter($list, function($s) use($status) { return $s !== $status;});
         return $this->statusIn($list);

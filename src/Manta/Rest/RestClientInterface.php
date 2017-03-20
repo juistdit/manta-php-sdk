@@ -11,7 +11,7 @@ namespace Manta\Rest;
 
 interface RestClientInterface
 {
-    public function __construct(string $api_url);
+    public function __construct($api_url);
 
     public function GET($url, $headers = []) ;
 

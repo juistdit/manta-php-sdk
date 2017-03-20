@@ -13,7 +13,7 @@ class CurlClient extends AbstractClient
     private $_default_curl_config;
     private $_api_url;
 
-    public function __construct(string $api_url) {
+    public function __construct($api_url) {
         //save the curl handle to enable pipelining.
         $this->_api_url = $api_url;
         $this->_curl = curl_init();
@@ -22,7 +22,7 @@ class CurlClient extends AbstractClient
         ];
     }
 
-    public function sendRequest(string $method, string $url, array $headers = [], array $data = null){
+    public function sendRequest($method, $url, array $headers = [], array $data = null){
         $curl = $this->_curl;
         $config = $this->_default_curl_config;
         //make it an non associative array

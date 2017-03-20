@@ -17,7 +17,7 @@ class Session
 
     private $_token;
 
-    public function __construct(RestClientInterface $apiClient, string $token){
+    public function __construct(RestClientInterface $apiClient, $token){
         $this->_apiClient = $apiClient;
         $this->_token = $token;
     }
