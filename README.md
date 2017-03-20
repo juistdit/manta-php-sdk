@@ -6,7 +6,7 @@ This package enables brands/suppliers to communicate with mantagifts using their
 
 ### Composer
 
-Install using the [packagist package](https://packagist.org/packages/joyent/php-manta) 
+Install using the [packagist package](https://packagist.org/packages/juistdit/manta-php-sdk) 
 via [composer](https://getcomposer.org/):
 
 ```
