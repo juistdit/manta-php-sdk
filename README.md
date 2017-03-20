@@ -4,7 +4,7 @@ This package enables brands/suppliers to communicate with mantagifts using their
 
 ## Installing
 
-###Composer
+### Composer
 
 Install using the [packagist package](https://packagist.org/packages/joyent/php-manta) 
 via [composer](https://getcomposer.org/):
@@ -13,7 +13,7 @@ via [composer](https://getcomposer.org/):
 composer require juistdit/manta-php-sdk
 ```
 
-###Phar Archive
+### Phar Archive
 Install by [downloading](https://github.com/juistdit/manta-php-sdk/releases) the latests release and including it:
 ```php
 require_once __DIR__ . "/manta-php-sdk.phar";
