@@ -3,7 +3,21 @@
 This package enables brands/suppliers to communicate with mantagifts using their API back-end.  Manta collects and distribute international brands. More information can found on <https://www.mantagifts.com>.
 
 ## Installing
-This package can be installed using Composer. TODO.
+
+###Composer
+
+Install using the [packagist package](https://packagist.org/packages/joyent/php-manta) 
+via [composer](https://getcomposer.org/):
+
+```
+composer require juistdit/manta-php-sdk
+```
+
+###Phar Archive
+Install by [downloading](https://github.com/juistdit/manta-php-sdk/releases) the latests release and including it:
+```php
+require_once __DIR__ . "/manta-php-sdk.phar";
+```
 
 ## Usage
 
