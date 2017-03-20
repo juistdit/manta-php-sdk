@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+//declare(strict_types=1);
 
 namespace Manta;
 
@@ -22,7 +22,7 @@ class Session
         $this->_token = $token;
     }
 
-    public function getCompany(int $id){
+    public function getCompany($id){
         $api = $this->_apiClient;
         $token = $this->_token;
         //$id has been validated by php type-checking

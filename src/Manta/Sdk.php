@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+//declare(strict_types=1);
 
 namespace Manta;
 
@@ -21,7 +21,7 @@ class Sdk {
         $this->_apiClient = new $clientClass($this->_config['api_url']);
     }
 
-    public function login(string $username, string $password){
+    public function login($username, $password){
         //retrieve the token
         $api = $this->_apiClient;
         $response = $api->POST('integration/customer/token', ['username'=>$username, 'password'=>$password]);
