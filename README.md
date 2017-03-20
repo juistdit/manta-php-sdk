@@ -2,9 +2,10 @@
 
 This package enables brands/suppliers to communicate with mantagifts using their API back-end.  Manta collects and distribute international brands. More information can found on <https://www.mantagifts.com>.
 
-## Installing
+## A. Installing
+Installing the SKD can be done 2 ways:
 
-### Composer
+### A1: Composer
 
 Install using the [packagist package](https://packagist.org/packages/juistdit/manta-php-sdk) 
 via [composer](https://getcomposer.org/):
@@ -13,13 +14,13 @@ via [composer](https://getcomposer.org/):
 composer require juistdit/manta-php-sdk
 ```
 
-### Phar Archive
+### A2: Phar Archive
 Install by [downloading](https://github.com/juistdit/manta-php-sdk/releases) the latest release and including it:
 ```php
 require_once __DIR__ . "/manta-php-sdk.phar";
 ```
 
-## Usage
+## B. Usage
 
 After installing Manta using composer, the first step is to create a Manta SDK object and creating a session using your credentials:
 
@@ -28,7 +29,7 @@ $sdk = new Manta\Sdk;
 $session = $sdk->login("brand@example.com", "123456789IsNotASafePassword");
 ```
 
-### Retrieving companies
+### C. Retrieving companies
 
 To retrieve information about a company one can do:
 ```php
