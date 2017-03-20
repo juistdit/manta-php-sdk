@@ -20,7 +20,7 @@ Install by [downloading](https://github.com/juistdit/manta-php-sdk/releases) the
 require_once __DIR__ . "/manta-php-sdk.phar";
 ```
 
-## B. Usage
+### B. Usage
 
 After installing Manta using composer, the first step is to create a Manta SDK object and creating a session using your credentials:
 
