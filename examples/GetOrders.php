@@ -20,11 +20,11 @@ echo PHP_EOL;
 
 echo "Retrieving All orders", PHP_EOL;
 
-$gOrders = $session->getOrders();
-foreach ($gOrders as $aOrders) {
+$oOrders = $session->getOrders();
+foreach ($oOrders as $oOrder) {
     echo "<hr/><br/>";
-    var_dump($aOrders);
+    var_dump($oOrder);
 }
 
-echo PHP_EOL, PHP_EOL;
+echo PHP_EOL;
 

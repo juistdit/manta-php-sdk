@@ -20,11 +20,11 @@ echo PHP_EOL;
 
 echo "Retrieving all companies of brand:", PHP_EOL;
 $oCompanies = $session->getCompanies();
-foreach ( $oCompanies as $oCompanies) {
+foreach ( $oCompanies as $oCompany) {
     echo "<hr/><br/>";
-    echo 'Company: ' . $oCompanies->company . '<br/>';
-    var_dump($oCompanies);
+    echo 'Company: ' . $oCompany->company . '<br/>';
+    var_dump($oCompany);
 
 }
-echo PHP_EOL, PHP_EOL;
+echo PHP_EOL;
 

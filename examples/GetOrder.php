@@ -20,5 +20,5 @@ echo PHP_EOL;
 
 echo "Retrieving Order id = 000000044:", PHP_EOL;
 var_dump($session->getOrder(000000044));
-echo PHP_EOL, PHP_EOL;
+echo PHP_EOL;
 

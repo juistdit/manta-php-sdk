@@ -20,5 +20,5 @@ echo PHP_EOL;
 
 echo "Retrieving company id = 33:", PHP_EOL;
 var_dump($session->getCompany(45));
-echo PHP_EOL, PHP_EOL;
+echo PHP_EOL;
 
