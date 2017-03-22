@@ -20,7 +20,7 @@ Install by [downloading](https://github.com/juistdit/manta-php-sdk/releases) the
 require_once __DIR__ . "/manta-php-sdk.phar";
 ```
 
-### B. Usage
+## B. Usage
 
 After installing Manta using composer, the first step is to create a Manta SDK object and creating a session using your credentials:
 
@@ -29,7 +29,7 @@ $sdk = new Manta\Sdk;
 $session = $sdk->login("brand@example.com", "123456789IsNotASafePassword");
 ```
 
-### C. Retrieving companies
+## C. Retrieving companies
 
 To retrieve information about a company one can do:
 ```php
