@@ -12,14 +12,18 @@ class CurlClient extends AbstractClient
     private $_curl;
     private $_default_curl_config;
     private $_api_url;
+    private $_debug = false;
 
-    public function __construct($api_url) {
+
+    public function __construct($api_url, $debug=false) {
         //save the curl handle to enable pipelining.
         $this->_api_url = $api_url;
+        $this->_debug = $debug;
         $this->_curl = curl_init();
         $this->_default_curl_config = [
             CURLOPT_RETURNTRANSFER => true,
         ];
+
     }
 
     public function sendRequest($method, $url, array $headers = [], array $data = null){
@@ -43,7 +47,14 @@ class CurlClient extends AbstractClient
         ] + $config;
         curl_setopt_array($curl, $config);
 
+        if ( $this->_debug) {
+            var_dump($curl);
+        }
+
         $content = curl_exec ($curl);
+
+
+
         if($content === false) {
             throw new RestException(curl_error($curl), curl_errno($curl));
         }
