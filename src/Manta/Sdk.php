@@ -17,8 +17,12 @@ class Sdk {
             'api_url' => static::API_URL,
             'http_client' => static::HTTP_CLIENT
         ], $config);
+        if ( !isset($this->_config['debug']) ) {
+            $this->_config['debug'] = false;
+        }
+
         $clientClass = $this->_config['http_client'];
-        $this->_apiClient = new $clientClass($this->_config['api_url']);
+        $this->_apiClient = new $clientClass($this->_config['api_url'],$this->_config['debug']);
     }
 
     public function login($username, $password){

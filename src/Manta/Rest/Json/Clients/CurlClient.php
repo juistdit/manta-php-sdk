@@ -48,7 +48,12 @@ class CurlClient extends AbstractClient
         curl_setopt_array($curl, $config);
 
         if ( $this->_debug) {
-            var_dump($curl);
+            echo '<br/>############# BEGIN DEBUG SENDING REQUEST #####################' . '<br/><br/>' ;
+            echo 'REQUEST METHOD:  ' .  $method . '<br/>' ;
+            echo 'API URL:  ' .  $url . '<br/>' ;
+            echo 'REQUEST HEADERS:  ' .   var_export($headers, true) . '<br/>' ;
+            echo 'REQUEST DATA:  ' .   var_export($data,true) . '<br/>' ;
+            echo '<br/>############# END DEBUG SENDING REQUEST #####################' . '<br/>' ;
         }
 
         $content = curl_exec ($curl);
