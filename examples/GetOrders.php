@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kay
- * Date: 15-02-17
- * Time: 12:10
- */
+
+/* This is a simple example how to get multiple orders from Manta as a brand based on status */
 require_once __DIR__ . '/../dist/manta-sdk-php.phar';
 
 use Manta\Sdk;
@@ -20,11 +16,17 @@ echo PHP_EOL;
 
 echo "Retrieving All orders", PHP_EOL;
 
-$oOrders = $session->getOrders();
+/* Set the status */
+$status_1='new';
+
+/* Add more status, the SDK will combine them in one output */
+//$status_2='complete';
+
+$oOrders = $session->getOrders()->statusIn([$status_1]);
+//$oOrders = $session->getOrders()->statusIn([$status_1, $status_2]);
 foreach ($oOrders as $oOrder) {
     echo "<hr/><br/>";
     var_dump($oOrder);
 }
 
 echo PHP_EOL;
-

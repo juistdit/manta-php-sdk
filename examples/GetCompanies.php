@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kay
- * Date: 15-02-17
- * Time: 12:10
- */
+
+/* This is a simple example how to get multiple companies from Manta where the brand has access to */
 require_once __DIR__ . '/../dist/manta-sdk-php.phar';
 
 use Manta\Sdk;
@@ -27,4 +23,3 @@ foreach ( $oCompanies as $oCompany) {
 
 }
 echo PHP_EOL;
-

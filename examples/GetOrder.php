@@ -1,13 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kay
- * Date: 15-02-17
- * Time: 12:10
- */
+
+/* This is a simple example how to get one order from Manta */
 require_once __DIR__ . '/../dist/manta-sdk-php.phar';
 
 use Manta\Sdk;
+
+$id_order = 100;  /* Internal <anta order id, which you should have received from Manta */
 
 $config = (include __DIR__ . '/config.php');
 
@@ -18,7 +16,9 @@ $session = $sdk->login($config['username'], $config['password']);
 echo "Logged in.", PHP_EOL;
 echo PHP_EOL;
 
-echo "Retrieving Order id = 000000044:", PHP_EOL;
-var_dump($session->getOrder(000000044));
+
+echo "Retrieving Order id = " . $id_order, PHP_EOL;
+var_dump($session->getOrder($id_order));
 echo PHP_EOL;
+
 
