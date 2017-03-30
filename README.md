@@ -50,3 +50,10 @@ foreach($companies as $company) {
 	echo ' - ', $company->company, PHP_EOL;
 }
 ```
+
+## D. Using phpunit to run tests
+
+From the root directory of the SDK, you can run the phpunit tests (see tests directory).
+ 
+Command:
+```./vendor/bin/phpunit --configuration phpunit.xml```
