@@ -65,58 +65,147 @@ class OrdersTest extends TestCase
 
             file_put_contents('/tmp/order', var_export($order, true));
             $message = '';
+
             $label = 'Company';
-            $expected =  $this->_config['order_accessible_company_name'];
-            $actual = (isset($order->company)) ? $order->company : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual === $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $expected =  (isset($this->_config['order_accessible_company_name']) ) ? $this->_config['order_accessible_company_name'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->company)) ? $order->company : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
 
             $label = 'Carriage';
-            $expected =  $this->_config['order_accessible_carriage'];
-            $actual = (isset($order->carriage)) ? $order->carriage : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual === $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $expected =  (isset($this->_config['order_accessible_carriage']) ) ? $this->_config['order_accessible_carriage'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->carriage)) ? $order->carriage : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
 
             $label = 'Buyer Contact ID';
-            $expected =  $this->_config['order_accessible_buyer_contact_id'];
-            $actual = (isset($order->buyer_contact_id)) ? $order->buyer_contact_id : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual == $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $expected =  (isset($this->_config['order_accessible_buyer_contact_id']) ) ? $this->_config['order_accessible_buyer_contact_id'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->buyer_contact_id)) ? $order->buyer_contact_id : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual == $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
 
             $label = 'Invoice Contact ID';
-            $expected =  $this->_config['order_accessible_invoice_contact_id'];
-            $actual = (isset($order->invoice_contact_id)) ? $order->invoice_contact_id : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual == $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $expected =  (isset($this->_config['order_accessible_invoice_contact_id']) ) ? $this->_config['order_accessible_invoice_contact_id'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->invoice_contact_id)) ? $order->invoice_contact_id : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual == $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
 
             $label = 'Delivery Contact ID';
-            $expected =  $this->_config['order_accessible_delivery_contact_id'];
-            $actual = (isset($order->delivery_contact_id)) ? $order->delivery_contact_id : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual == $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $expected =  (isset($this->_config['order_accessible_delivery_contact_id']) ) ? $this->_config['order_accessible_delivery_contact_id'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->delivery_contact_id)) ? $order->delivery_contact_id : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual == $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
 
             $label = 'Invoice Address ID';
-            $expected =  $this->_config['order_accessible_invoice_address_id'];
-            $actual = (isset($order->invoice_address_id)) ? $order->invoice_address_id : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual == $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $expected =  (isset($this->_config['order_accessible_invoice_address_id']) ) ? $this->_config['order_accessible_invoice_address_id'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                    $actual = (isset($order->invoice_address_id)) ? $order->invoice_address_id : 'NOT_PRESENT';
+                    $message .= (isset($actual) && ($actual == $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+             }
 
             $label = 'Delivery Address ID';
-            $expected =  $this->_config['order_accessible_delivery_address_id'];
-            $actual = (isset($order->delivery_address_id)) ? $order->delivery_address_id : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual == $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $expected =  (isset($this->_config['order_accessible_delivery_address_id']) ) ? $this->_config['order_accessible_delivery_address_id'] : 'DONOTCHECK';
+             if ( $expected != 'DONOTCHECK' ) {
+                 $actual = (isset($order->delivery_address_id)) ? $order->delivery_address_id : 'NOT_PRESENT';
+                 $message .= (isset($actual) && ($actual == $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+             }
 
             $label = 'Preferred Delivery Date';
-            $expected =  $this->_config['order_accessible_preferred_delivery_date'];
-            $actual = (isset($order->preferred_delivery_date)) ? $order->preferred_delivery_date : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual === $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $expected =  (isset($this->_config['order_accessible_preferred_delivery_date']) ) ? $this->_config['order_accessible_preferred_delivery_date'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->preferred_delivery_date)) ? $order->preferred_delivery_date : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
 
-            //TBD
             $label = 'Invoice Address';
-            $expected =  $this->_config['order_accessible_invoice_address'];
-            $actual = (isset($order->order_details['billing_address']['street'][0])) ? $order->order_details['billing_address']['street'][0] : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual === $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $expected =  (isset($this->_config['order_accessible_invoice_address']) ) ? $this->_config['order_accessible_invoice_address'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->order_details['billing_address']['street'][0])) ? $order->order_details['billing_address']['street'][0] : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
 
-            //TBD
             $label = 'Delivery Address';
-            $expected =  $this->_config['order_accessible_delivery_address'];
+            $expected =  (isset($this->_config['order_accessible_delivery_address']) ) ? $this->_config['order_accessible_delivery_address'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->order_details['extension_attributes']['shipping_assignments'][0]['shipping']['address']['street'][0])) ? $order->order_details['extension_attributes']['shipping_assignments'][0]['shipping']['address']['street'][0] : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
 
-            $actual = (isset($order->order_details['extension_attributes']['shipping_assignments'][0]['shipping']['address']['street'][0])) ? $order->order_details['extension_attributes']['shipping_assignments'][0]['shipping']['address']['street'][0] : 'NOT_PRESENT' ;
-            $message .= ( isset($actual) && ( $actual === $expected) ) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            $label = 'Sales Person';
+            $expected =  (isset($this->_config['order_accessible_sales_person']) ) ? $this->_config['order_accessible_sales_person'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->sales_person)) ? $order->sales_person : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Payment Terms';
+            $expected =  (isset($this->_config['order_accessible_payment_terms']) ) ? $this->_config['order_accessible_payment_terms'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->payment_terms)) ? $order->payment_terms : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Brand Remark';
+            $expected =  (isset($this->_config['order_accessible_brand_remark']) ) ? $this->_config['order_accessible_brand_remark'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->brand_remark)) ? $order->brand_remark : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Company Order Reference';
+            $expected =  (isset($this->_config['order_accessible_company_order_reference']) ) ? $this->_config['order_accessible_company_order_reference'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->company_order_reference)) ? $order->company_order_reference : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Order id Brand';
+            $expected =  (isset($this->_config['order_accessible_order_id_brand']) ) ? $this->_config['order_accessible_order_id_brand'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->order_id_brand)) ? $order->order_id_brand : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Brand invoice address code';
+            $expected =  (isset($this->_config['order_accessible_brand_invoice_address_code']) ) ? $this->_config['order_accessible_brand_invoice_address_code'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->brand_invoice_address_code)) ? $order->brand_invoice_address_code : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Brand delivery address code';
+            $expected =  (isset($this->_config['order_accessible_brand_delivery_address_code']) ) ? $this->_config['order_accessible_brand_delivery_address_code'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->brand_delivery_address_code)) ? $order->brand_delivery_address_code : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Order location';
+            $expected =  (isset($this->_config['order_accessible_order_location']) ) ? $this->_config['order_accessible_order_location'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->order_location)) ? $order->order_location : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Payment method';
+            $expected =  (isset($this->_config['order_accessible_payment_method']) ) ? $this->_config['order_accessible_payment_method'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->payment_method)) ? $order->payment_method : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Brand discount';
+            $expected =  (isset($this->_config['order_accessible_brand_discount']) ) ? $this->_config['order_accessible_brand_discount'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->brand_discount)) ? $order->brand_discount : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . '=> Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
 
             if ( !empty($message)) {
                 $this->fail($message);
