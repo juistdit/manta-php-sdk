@@ -53,7 +53,7 @@ class CompaniesTest extends TestCase
         try {
             $company = $session->getCompany($this->_config['company_accessible']);
             $this->assertInstanceOf(\Manta\DataObjects\Objects\Company::class, $company);
-            $this->assertEquals($company->shop_name, "SDK Test shop");
+            $this->assertEquals($this->_config['company_accessible_shop_name'],$company->shop_name);
         } catch (\Manta\Exceptions\NoAccessException $e) {
             $this->fail(sprintf("Failed requesting company with company id %s with username %s on api %s.",
                 $this->_config['company_accessible'], $this->_config['username'], $this->_config['api_url']));

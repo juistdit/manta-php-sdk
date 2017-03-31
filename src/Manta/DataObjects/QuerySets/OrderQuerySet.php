@@ -11,20 +11,39 @@ use Manta\Rest\RestResponse;
 class OrderQuerySet extends QuerySet
 {
 
-    private static $_allowedStatuses = null;
     public function getAllowedStatuses() {
-        //return ['new', 'invoiced', 'shipped', 'complete', 'canceled'];//TBD use the code below
-        if(self::$_allowedStatuses === null){
-            $response = $this->_apiClient->GET("brand/orders?status=invalid_status", ['Authorization' => "Bearer " . $this->_token]);
-            if($response->isError()){
-                if(preg_match("/allowed (statuses)? are (?P<allowed_statuses>[a-zA-Z, ]*)/", $response->asException()->getMessage(), $output_array)){
-                    self::$_allowedStatuses = array_map('trim', explode(',', $output_array['allowed_statuses']));
-                    return self::$_allowedStatuses;
-                }
-            }
-            throw new ApiException("Couldn't request the allowed statuses");
-        }
-        return self::$_allowedStatuses;
+        $allowed_statuses = array();
+        $allowed_statuses[] = 'wait_brand_confirm';
+        $allowed_statuses[] = 'new';
+        $allowed_statuses[] = 'in_progress';
+        //$allowed_statuses[] = 'in_progress_action_needed';
+        $allowed_statuses[] = 'complete';
+        $allowed_statuses[] = 'in_progress_proforma';
+        $allowed_statuses[] = 'in_progress_invoice';
+        $allowed_statuses[] = 'in_progress_company';
+        $allowed_statuses[] = 'in_progress_brand';
+        $allowed_statuses[] = 'in_progress_manta';
+        $allowed_statuses[] = 'in_progress_ship';
+        $allowed_statuses[] = 'in_progress_ship_invoice_open';
+        $allowed_statuses[] = 'in_progress_ship_invoice';
+        $allowed_statuses[] = 'closed';
+        $allowed_statuses[] = 'in_progress_ship';
+
+        return $allowed_statuses;
+    }
+
+    public function getNotAllowedStatuses() {
+        $not_allowed_statuses = array();
+        $not_allowed_statuses[] = 'quote';
+        $not_allowed_statuses[] = 'wait_company_confirm';
+        $not_allowed_statuses[] = 'wait_manta_confirm';
+        $not_allowed_statuses[] = 'canceled';
+        $not_allowed_statuses[] = 'quote_canceled';
+        $not_allowed_statuses[] = 'fraud';
+        $not_allowed_statuses[] = 'holded';
+
+        return $not_allowed_statuses;
+
     }
 
     public function __construct ($apiClient, $resource, $token, $queryFilters) {
