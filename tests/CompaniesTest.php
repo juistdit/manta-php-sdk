@@ -47,7 +47,7 @@ class CompaniesTest extends TestCase
         }
     }
 
-    public function testGetCompany(){
+    public function testGetCompanyOneDetails(){
         $session = $this->_session;
 
         try {
