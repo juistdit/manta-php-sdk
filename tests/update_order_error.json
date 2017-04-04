@@ -1,0 +1,8 @@
+{
+  "order": {
+    "process": {
+      "process_status": "error",
+      "process_message": "We could not process the order from Manta"
+    }
+  }
+}

@@ -7,7 +7,7 @@ use Manta\Sdk;
 
 $config = (include __DIR__ . '/config.php');
 
-$company_id = 65;/* This is the internal Manta id, so should have been received by Manta first */
+$company_id = 38;/* This is the internal Manta id, so should have been received by Manta first */
 
 $sdk = new Sdk($config);
 

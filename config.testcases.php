@@ -22,21 +22,21 @@ $aConfigTemp =  [
     'order_accessible_delivery_contact_id' => '36',
     'order_accessible_invoice_address_id' => '52',
     'order_accessible_delivery_address_id' => '127',
-    'order_accessible_preferred_delivery_date' => '2017-04-01',
+    'order_accessible_preferred_delivery_date' => '2017-04-03',
     'order_accessible_invoice_address' => 'Wilhelminapark 22',
     'order_accessible_delivery_address' => 'Wilhelminapark 22b',
 
-
     'order_accessible_sales_person' => 'Jurn Raaijmakers',
-    'order_accessible_payment_terms' => '7_days_net',
-    'order_accessible_brand_remark' => 'This is a remark',
-    'order_accessible_company_order_reference' => '4747',
-    'order_accessible_order_id_brand' => '1001',
+    'order_accessible_payment_terms' => 'payment_in_advance', // payment_in_advance
+    'order_accessible_brand_remark' => 'This mark should be shown to the brand',
+    'order_update_company_brand_code' => 'company_brand_code',
+    'order_accessible_company_order_reference' => 'CompanyOrder103',
+    'order_accessible_order_id_brand' => 'BrandOrder103',
     'order_accessible_brand_invoice_address_code' => '1002',
     'order_accessible_brand_delivery_address_code' => '1003',
-    'order_accessible_order_location' => 'Some where',
-    'order_accessible_payment_method' => 'Method',
-    'order_accessible_brand_discount' => '7',
+    'order_accessible_order_location' => 'Manta Backend',
+    'order_accessible_payment_method' => 'bank_transfer',
+    'order_accessible_brand_discount' => '15',
     'order_accessible_status' => 'new',
     'order_accessible_total_item_count' =>4,
 ];
@@ -58,5 +58,13 @@ $aConfigTemp['order_accessible_carriage'] = 10.00;
 $aConfigTemp['order_accessible_tax_amount'] = 0;
 $aConfigTemp['order_accessible_grand_total'] = $aConfigTemp['order_accessible_subtotal'] + $aConfigTemp['order_accessible_tax_amount'] + $aConfigTemp['order_accessible_carriage'];
 $aConfigTemp['order_accessible_grand_total_minus_carriage'] = $aConfigTemp['order_accessible_subtotal'] + $aConfigTemp['order_accessible_tax_amount'] ;
+
+/* Validate update order with get Order */
+$aConfigTemp['order_update_order_id_brand'] = "order_id_brand";
+$aConfigTemp['order_update_company_brand_code'] = "company_brand_code";
+$aConfigTemp['order_update_company_order_reference'] = "company_order_reference";
+$aConfigTemp['brand_invoice_address_code'] = "brand_invoice_address_code";
+$aConfigTemp['brand_delivery_address_code'] = "brand_delivery_address_code";
+$aConfigTemp['brand_process_date'] = "2017-04-07";
 
 return $aConfigTemp;

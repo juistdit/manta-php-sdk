@@ -33,11 +33,15 @@ abstract class RestResponse
         if(isset($this->body['message']) && isset(self::$_exceptionTranslationTable[$this->body['message']])) {
             return self::$_exceptionTranslationTable[$this->body['message']];
         }
-        foreach(self::$_exceptionTranslationTableRegex as $regex => $type){
-            if(preg_match($regex, $this->body['message'])){
-                return $type;
+        if(isset($this->body['message']) ) {
+            foreach (self::$_exceptionTranslationTableRegex as $regex => $type) {
+                if (preg_match($regex, $this->body['message'])) {
+                    return $type;
+                }
             }
         }
+
+        file_put_contents('/tmp/error-api',var_export($this->body, true) );
         return self::$_exceptionTranslationTable['DEFAULT'];
     }
 
@@ -50,8 +54,15 @@ abstract class RestResponse
                 }
             }*/
             return $message;
-        } else {
+        }
+        else if(isset($this->body['messages'][0]['message']) ) {
+             $message = $this->body['messages'][0]['message'];
+            return $message;
+            }
+        else {
+            file_put_contents('/tmp/error',  var_export($this->body,true));
             return "Something went wrong when communicating with the API";
+
         }
     }
 

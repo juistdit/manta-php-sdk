@@ -1,0 +1,42 @@
+{
+  "order": {
+    "order_date": "2017-04-04",
+    "order_id_brand": "order_id_brand_101",
+    "company_id": 38,
+    "buyer_contact_id": 36,
+    "invoice_contact_id": 67,
+    "delivery_contact_id": 77,
+    "invoice_address_id": 84,
+    "delivery_address_id": 143,
+    "brand_invoice_address_code": "brand_invoice_address_code_101",
+    "brand_delivery_address_code": "brand_delivery_address_code_101",
+    "shop_name": "nl",
+    "order_location": "Somewhere",
+    "employee_id": 1,
+    "type": "OC",
+    "payment_terms": "payment_in_advance",
+    "payment_method": "bank_transfer",
+    "preferred_delivery_date": "2017-04-05",
+    "brand_remark": "This is a remark for or from the brand",
+    "po_attached": "no",
+    "brand_discount": "15",
+    "order_item_details": [
+      {
+        "po_id": "",
+        "items": [
+          {
+            "qty": 6,
+            "sku": "SKNUTROBOTS1",
+            "cancelled": 0,
+            "cancel_reason": "",
+            "price": 9.5,
+            "discount": 50
+          }
+        ]
+      }
+    ],
+    "order_status": "wait_company_confirm",
+    "show_to_brand": 0,
+    "show_to_company": 0
+  }
+}

@@ -58,13 +58,12 @@ class OrdersTest extends TestCase
 
     public function testGetOrderDetails(){
         $session = $this->_session;
-
+        $message = '';
         try {
             $order = $session->getOrder($this->_config['order_with_access']);
             $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
 
             file_put_contents('/tmp/order', var_export($order, true));
-            $message = '';
 
             $label = 'Company';
             $expected =  (isset($this->_config['order_accessible_company_name']) ) ? $this->_config['order_accessible_company_name'] : 'DONOTCHECK';
@@ -154,6 +153,13 @@ class OrdersTest extends TestCase
             $expected =  (isset($this->_config['order_accessible_brand_remark']) ) ? $this->_config['order_accessible_brand_remark'] : 'DONOTCHECK';
             if ( $expected != 'DONOTCHECK' ) {
                 $actual = (isset($order->brand_remark)) ? $order->brand_remark : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+            $label = 'Company_brand_code';
+            $expected =  (isset($this->_config['order_accessible_company_brand_code']) ) ? $this->_config['order_accessible_company_brand_code'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->company_brand_code)) ? $order->company_brand_code : 'NOT_PRESENT';
                 $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
             }
 
@@ -367,6 +373,140 @@ class OrdersTest extends TestCase
             }
         }
     }
+
+    public function testUpdateOrderBasic() {
+        $session = $this->_session;
+
+        $requestBody = file_get_contents(__DIR__ . '/update_order.json');
+         try {
+            $updateOrderResponse = $session->updateOrder($this->_config['order_with_access'], $requestBody);
+             $this->assertTrue($updateOrderResponse);
+             $order = $session->getOrder($this->_config['order_with_access']);
+             $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
+
+             $message = '';
+
+             $label = 'Company_brand_code';
+             $expected =  (isset($this->_config['order_update_company_brand_code']) ) ? $this->_config['order_update_company_brand_code'] : 'DONOTCHECK';
+             if ( $expected != 'DONOTCHECK' ) {
+                 $actual = (isset($order->company_brand_code)) ? $order->company_brand_code : 'NOT_PRESENT';
+                 $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
+             }
+
+             $label = 'Company Order Reference';
+             $expected =  (isset($this->_config['order_update_company_order_reference']) ) ? $this->_config['order_update_company_order_reference'] : 'DONOTCHECK';
+             if ( $expected != 'DONOTCHECK' ) {
+                 $actual = (isset($order->company_order_reference)) ? $order->company_order_reference : 'NOT_PRESENT';
+                 $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
+             }
+
+             $label = 'Order id Brand';
+             $expected =  (isset($this->_config['order_update_order_id_brand']) ) ? $this->_config['order_update_order_id_brand'] : 'DONOTCHECK';
+             if ( $expected != 'DONOTCHECK' ) {
+                 $actual = (isset($order->order_id_brand)) ? $order->order_id_brand : 'NOT_PRESENT';
+                 $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
+             }
+
+             $label = 'Brand invoice address code';
+             $expected =  (isset($this->_config['order_update_brand_invoice_address_code']) ) ? $this->_config['order_update_brand_invoice_address_code'] : 'DONOTCHECK';
+             if ( $expected != 'DONOTCHECK' ) {
+                 $actual = (isset($order->brand_invoice_address_code)) ? $order->brand_invoice_address_code : 'NOT_PRESENT';
+                 $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
+             }
+
+             $label = 'Brand delivery address code';
+             $expected =  (isset($this->_config['order_update_brand_delivery_address_code']) ) ? $this->_config['order_update_brand_delivery_address_code'] : 'DONOTCHECK';
+             if ( $expected != 'DONOTCHECK' ) {
+                 $actual = (isset($order->brand_delivery_address_code)) ? $order->brand_delivery_address_code : 'NOT_PRESENT';
+                 $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
+             }
+
+             if ( !empty($message)) {
+                 $this->fail($message);
+             }
+
+
+        } catch (\Manta\Exceptions\NoAccessException $e) {
+             $this->fail('No access');
+        }
+    }
+
+    public function testUpdateFailedOrder() {
+        $session = $this->_session;
+
+        $requestBody = file_get_contents(__DIR__ . '/update_order_error.json');
+        try {
+            $updateOrderResponse = $session->updateOrder($this->_config['order_with_access'], $requestBody);
+            file_put_contents('/tmp/failed', var_export($updateOrderResponse, true));
+            $this->assertTrue($updateOrderResponse);
+            $order = $session->getOrder($this->_config['order_with_access']);
+            $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
+
+            $message = '';
+
+            $label = 'Company_brand_code';
+            $expected =  (isset($this->_config['order_update_company_brand_code']) ) ? $this->_config['order_update_company_brand_code'] : 'DONOTCHECK';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->company_brand_code)) ? $order->company_brand_code : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+
+        } catch (\Manta\Exceptions\NoAccessException $e) {
+            $this->fail('No access');
+        }
+    }
+
+    public function testCreateOrderBasic() {
+        $session = $this->_session;
+
+        $requestBody = file_get_contents(__DIR__ . '/create_order.json');
+
+        $requestBodyArray = json_decode($requestBody);
+
+        if ( !isset($requestBodyArray->order->company_id) || empty($requestBodyArray->order->company_id) ) {
+            $this->fail('Create order json not valid, unexpected json object:' . var_export($requestBodyArray->order,true));
+        }
+        $this->assertTrue(true);
+
+
+        try {
+            $createOrderResponse = $session->createOrder($requestBody);
+
+            if ( !is_numeric($createOrderResponse)) {
+                $this->fail('Order not created, unexpected response:' . var_export($createOrderResponse,true));
+            }
+            $this->assertTrue(true);
+
+/*            $aResponse = json_decode($createOrderResponse);
+
+            if ( !is_array($aResponse) || !isset($aResponse[0]) || empty($aResponse) ) {
+                $this->fail('Order not created, unexpected response:' . var_export($aResponse,true));
+            }
+
+            $this->assertTrue(true);
+*/
+            $orderId = $createOrderResponse;
+
+            $order = $session->getOrder($orderId);
+
+            $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
+
+            $message = '';
+
+            $label = 'Company id';
+            $expected =  (isset($requestBodyArray->order->company_id) ) ? $requestBodyArray->order->company_id : 'UNEXPECTED';
+            if ( $expected != 'DONOTCHECK' ) {
+                $actual = (isset($order->company_id)) ? $order->company_id : 'NOT_PRESENT';
+                $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
+            }
+
+
+        } catch (\Manta\Exceptions\NoAccessException $e) {
+            $this->fail('No access');
+        }
+    }
+
 
 
 

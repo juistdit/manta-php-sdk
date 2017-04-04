@@ -1,0 +1,14 @@
+{
+  "order": {
+    "order_id_brand": "order_id_brand",
+    "company_brand_code": "company_brand_code",
+    "company_order_reference": "company_order_reference",
+    "brand_invoice_address_code": "brand_invoice_address_code",
+    "brand_delivery_address_code": "brand_delivery_address_code",
+    "brand_process_date": "2017-04-17",
+    "process": {
+      "process_status": "SUCCESS",
+      "process_message": "string"
+    }
+  }
+}

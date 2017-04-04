@@ -49,6 +49,7 @@ class Session
         if($response->isError()){
             throw $response->asException();
         }
+
         return new Order($response->body);
     }
 
@@ -58,4 +59,29 @@ class Session
         $resource = 'brand/orders';
         return new OrderQuerySet($api, $resource, $token, []);
     }
+
+    public function updateOrder($id, $requestBodyJson='') {
+        $api = $this->_apiClient;
+        $token = $this->_token;
+        $resource = "brand/orders/$id";
+        $requestBodyArray = json_decode($requestBodyJson,true);
+        $response = $api->PUT($resource, $requestBodyArray, ['Authorization' => "Bearer $token"]);
+        if($response->isError()){
+            throw $response->asException();
+        }
+        return $response->body;
+    }
+
+    public function createOrder($requestBodyJson='') {
+        $api = $this->_apiClient;
+        $token = $this->_token;
+        $resource = "brand/orders/";
+        $requestBodyArray = json_decode($requestBodyJson,true);
+        $response = $api->POST($resource, $requestBodyArray, ['Authorization' => "Bearer $token"]);
+        if($response->isError()){
+            throw $response->asException();
+        }
+        return $response->body;
+    }
+
 }
