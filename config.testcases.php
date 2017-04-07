@@ -60,11 +60,14 @@ $aConfigTemp['order_accessible_grand_total'] = $aConfigTemp['order_accessible_su
 $aConfigTemp['order_accessible_grand_total_minus_carriage'] = $aConfigTemp['order_accessible_subtotal'] + $aConfigTemp['order_accessible_tax_amount'] ;
 
 /* Validate update order with get Order */
-$aConfigTemp['order_update_order_id_brand'] = "order_id_brand";
-$aConfigTemp['order_update_company_brand_code'] = "company_brand_code";
-$aConfigTemp['order_update_company_order_reference'] = "company_order_reference";
-$aConfigTemp['brand_invoice_address_code'] = "brand_invoice_address_code";
-$aConfigTemp['brand_delivery_address_code'] = "brand_delivery_address_code";
-$aConfigTemp['brand_process_date'] = "2017-04-07";
+
+$aConfigTemp['order_update_order_id'] = 233;
+
+//$aConfigTemp['order_update_order_id_brand'] = "order_id_brand";
+//$aConfigTemp['order_update_company_brand_code'] = "company_brand_code";
+//$aConfigTemp['order_update_company_order_reference'] = "company_order_reference";
+//$aConfigTemp['brand_invoice_address_code'] = "brand_invoice_address_code";
+//$aConfigTemp['brand_delivery_address_code'] = "brand_delivery_address_code";
+//$aConfigTemp['brand_process_date'] = "2017-04-07";
 
 return $aConfigTemp;

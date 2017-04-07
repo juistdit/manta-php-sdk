@@ -379,9 +379,9 @@ class OrdersTest extends TestCase
 
         $requestBody = file_get_contents(__DIR__ . '/update_order.json');
          try {
-            $updateOrderResponse = $session->updateOrder($this->_config['order_with_access'], $requestBody);
+            $updateOrderResponse = $session->updateOrder($this->_config['order_update_order_id'], $requestBody);
              $this->assertTrue($updateOrderResponse);
-             $order = $session->getOrder($this->_config['order_with_access']);
+             $order = $session->getOrder($this->_config['order_update_order_id']);
              $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
 
              $message = '';
@@ -422,6 +422,7 @@ class OrdersTest extends TestCase
              }
 
              if ( !empty($message)) {
+                 $message = "Order_id: " . $this->_config['order_update_order_id'] . ': ' . PHP_EOL . $message;
                  $this->fail($message);
              }
 
@@ -460,6 +461,7 @@ class OrdersTest extends TestCase
     public function testCreateOrderBasic() {
         $session = $this->_session;
 
+        //$requestBody = file_get_contents(__DIR__ . '/create_order_simple.json');
         $requestBody = file_get_contents(__DIR__ . '/create_order.json');
 
         $requestBodyArray = json_decode($requestBody);
@@ -473,20 +475,20 @@ class OrdersTest extends TestCase
         try {
             $createOrderResponse = $session->createOrder($requestBody);
 
-            if ( !is_numeric($createOrderResponse)) {
+
+            file_put_contents('/tmp/order_return', var_export($createOrderResponse,true));
+
+            if ( !isset($createOrderResponse['order_id']) || empty($createOrderResponse['order_id']) ) {
+                $this->fail('Order not created, unexpected response, order_id not correct:' . var_export($createOrderResponse,true));
+            }
+            if ( !isset($createOrderResponse['tmp_order_id']) || empty($createOrderResponse['tmp_order_id']) ) {
+                $this->assertTrue(false);
                 $this->fail('Order not created, unexpected response:' . var_export($createOrderResponse,true));
             }
             $this->assertTrue(true);
 
-/*            $aResponse = json_decode($createOrderResponse);
+            $orderId = $createOrderResponse['order_id'];
 
-            if ( !is_array($aResponse) || !isset($aResponse[0]) || empty($aResponse) ) {
-                $this->fail('Order not created, unexpected response:' . var_export($aResponse,true));
-            }
-
-            $this->assertTrue(true);
-*/
-            $orderId = $createOrderResponse;
 
             $order = $session->getOrder($orderId);
 
@@ -500,6 +502,7 @@ class OrdersTest extends TestCase
                 $actual = (isset($order->company_id)) ? $order->company_id : 'NOT_PRESENT';
                 $message .= (isset($actual) && ($actual === $expected)) ? '' : PHP_EOL . $label . ' => Expected:  ' . $expected . ', Actual: ' . $actual;
             }
+
 
 
         } catch (\Manta\Exceptions\NoAccessException $e) {

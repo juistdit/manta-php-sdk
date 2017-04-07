@@ -1,0 +1,28 @@
+{
+  "order": {
+    "order_date": "2017-04-05",
+    "tmp_order_id"
+    "company_id": 38,
+    "buyer_contact_id": 77,
+    "invoice_contact_id": 77,
+    "delivery_contact_id": 77,
+    "invoice_address_id": 52,
+    "delivery_address_id": 84,
+    "shop_name": "TBD",
+    "order_location": "TBD",
+    "employee_id": 8,
+    "type": "OC",
+    "preferred_delivery_date": "2017-07-06",
+    "brand_remark": "Order remarks:\n\n\nCompany remarks:\nCompany. Re\n\nProduct remarks:\nProduct re\n\nAddress remarks:\nAddress re",
+    "order_item_details": [
+      {
+        "qty": 3,
+        "sku": "LMSAC03_10",
+        "price": 37.5
+      }
+    ],
+    "order_status": "wait_manta_confirm",
+    "show_to_brand": 1,
+    "show_to_company": 0
+  }
+}

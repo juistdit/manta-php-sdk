@@ -1,0 +1,24 @@
+{
+  "order": {
+    "tmp_order_id" : 93783334872,
+    "company_id": 38,
+    "buyer_contact_id": 36,
+    "invoice_contact_id": 36,
+    "delivery_contact_id": 36,
+    "invoice_address_id": 84,
+    "delivery_address_id": 167,
+    "shopcode": "nl",
+    "order_item_details": [
+      {
+        "po_id": "",
+        "items": [
+          {
+            "qty": 6,
+            "sku": "SKNUTROBOTS1",
+            "price": 9.5
+          }
+        ]
+      }
+    ]
+  }
+}
