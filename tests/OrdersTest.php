@@ -461,8 +461,8 @@ class OrdersTest extends TestCase
     public function testCreateOrderBasic() {
         $session = $this->_session;
 
-        //$requestBody = file_get_contents(__DIR__ . '/create_order_simple.json');
-        $requestBody = file_get_contents(__DIR__ . '/create_order.json');
+        $requestBody = file_get_contents(__DIR__ . '/create_order_simple.json');
+        //$requestBody = file_get_contents(__DIR__ . '/create_order.json');
 
         $requestBodyArray = json_decode($requestBody);
 

@@ -1,11 +1,11 @@
 {
   "order": {
-    "order_id_brand": "order_id_brand_231",
-    "company_brand_code": "company_brand_code",
-    "company_order_reference": "company_order_reference_1001",
-    "brand_invoice_address_code": "brand_invoice_address_code_igg",
-    "brand_delivery_address_code": "brand_delivery_address_code_ggg",
-    "brand_process_date": "2017-04-05",
+    "order_id_brand": "order_id_brand_81",
+    "company_brand_code": "company_brand_code_38",
+    "company_order_reference": "company_order_reference_81",
+    "brand_invoice_address_code": "brand_invoice_address_code_52",
+    "brand_delivery_address_code": "brand_invoice_address_code_52",
+    "brand_process_date": "2017-04-10",
     "process": {
       "process_status": "SUCCESS",
       "process_message": "string"

@@ -29,7 +29,6 @@ $aConfigTemp =  [
     'order_accessible_sales_person' => 'Jurn Raaijmakers',
     'order_accessible_payment_terms' => 'payment_in_advance', // payment_in_advance
     'order_accessible_brand_remark' => 'This mark should be shown to the brand',
-    'order_update_company_brand_code' => 'company_brand_code',
     'order_accessible_company_order_reference' => 'CompanyOrder103',
     'order_accessible_order_id_brand' => 'BrandOrder103',
     'order_accessible_brand_invoice_address_code' => '1002',
@@ -61,8 +60,9 @@ $aConfigTemp['order_accessible_grand_total_minus_carriage'] = $aConfigTemp['orde
 
 /* Validate update order with get Order */
 
-$aConfigTemp['order_update_order_id'] = 233;
+$aConfigTemp['order_update_order_id'] = 81;
 
+$aConfigTemp['order_update_company_brand_code'] = "company_brand_code_38";
 //$aConfigTemp['order_update_order_id_brand'] = "order_id_brand";
 //$aConfigTemp['order_update_company_brand_code'] = "company_brand_code";
 //$aConfigTemp['order_update_company_order_reference'] = "company_order_reference";
