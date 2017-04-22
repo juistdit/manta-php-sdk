@@ -466,29 +466,29 @@ class OrdersTest extends TestCase
 
         $requestBodyArray = json_decode($requestBody);
 
-        if ( !isset($requestBodyArray->order->company_id) || empty($requestBodyArray->order->company_id) ) {
-            $this->fail('Create order json not valid, unexpected json object:' . var_export($requestBodyArray->order,true));
+
+        if ( !isset($requestBodyArray->orders[0]->company_id) || empty($requestBodyArray->orders[0]->company_id) ) {
+            $this->fail('Create order json not valid, unexpected json object:' . var_export($requestBodyArray->orders,true));
         }
         $this->assertTrue(true);
+
 
 
         try {
             $createOrderResponse = $session->createOrder($requestBody);
 
-
             file_put_contents('/tmp/order_return', var_export($createOrderResponse,true));
 
-            if ( !isset($createOrderResponse['order_id']) || empty($createOrderResponse['order_id']) ) {
+            if ( !isset($createOrderResponse['orders'][0]['order_id']) || empty($createOrderResponse['orders'][0]['order_id']) ) {
                 $this->fail('Order not created, unexpected response, order_id not correct:' . var_export($createOrderResponse,true));
             }
-            if ( !isset($createOrderResponse['tmp_order_id']) || empty($createOrderResponse['tmp_order_id']) ) {
+            if ( !isset($createOrderResponse['orders'][0]['tmp_order_id']) || empty($createOrderResponse['orders'][0]['tmp_order_id']) ) {
                 $this->assertTrue(false);
                 $this->fail('Order not created, unexpected response:' . var_export($createOrderResponse,true));
             }
             $this->assertTrue(true);
 
-            $orderId = $createOrderResponse['order_id'];
-
+            $orderId = $createOrderResponse['orders'][0]['order_id'];
 
             $order = $session->getOrder($orderId);
 

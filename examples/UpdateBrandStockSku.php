@@ -14,14 +14,7 @@ $basicUrl = $config['api_url'];
 
 $settingsScenario = [];
 
-/* BEGIN ADJUST */
-$settingsScenario['product_sku'] = 'SKLIGHTBOTTLE1'; // SKU
-$settingsScenario['product_qty'] = 500;
-$settingsScenario['is_in_stock'] = true;
-/* END ADJUST */
-
-
-$settingsScenario['api'] = 'brand/products/@@SKU@@/stockitems';
+$settingsScenario['api'] = 'brand/products/stockitems';
 $settingsScenario['username'] = $config['username'];
 $settingsScenario['password'] = $config['password'];
 $settingsScenario['token_url'] = $basicUrl . 'integration/customer/token';
@@ -49,14 +42,22 @@ echo print_r($response);die();
 unset($data);
 
 $aHeaders = array('Authorization' => 'Bearer ' . $token );
-$data = ['stockItem' => ['qty' => $settingsScenario['product_qty'], 'is_in_stock' => $settingsScenario['is_in_stock']]];
-$url=$basicUrl . str_replace("@@SKU@@", $settingsScenario['product_sku'], $settingsScenario['api']);
+$data = $requestBody = file_get_contents(__DIR__ . '/update_stock.json');
+$url=$basicUrl . $settingsScenario['api'];
+
+$start = microtime(true);
+
 $response = Request::put($url)
 ->body($data)
 ->addHeaders($aHeaders)
 ->sendsJson()
 ->send();
 
+
+$end = microtime(true);
+$total = $end - $start;
+
+echo 'Execution time:' . $total . "<br/>";
 echo "Status: " . $response->code . "<br/>";
 echo "url: " . $url. "<br/>";
 echo "<pre>";

@@ -77,10 +77,12 @@ class Session
         $token = $this->_token;
         $resource = "brand/orders/";
         $requestBodyArray = json_decode($requestBodyJson,true);
+
         $response = $api->POST($resource, $requestBodyArray, ['Authorization' => "Bearer $token"]);
         if($response->isError()){
             throw $response->asException();
         }
+        var_dump($response->body);die();
         return $response->body;
     }
 

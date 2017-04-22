@@ -5,7 +5,7 @@ require_once __DIR__ . '/../dist/manta-sdk-php.phar';
 
 use Manta\Sdk;
 
-$id_order = 232;  /* Internal <anta order id, which you should have received from Manta */
+$id_order = 284;  /* Internal <anta order id, which you should have received from Manta */
 
 $config = (include __DIR__ . '/config.php');
 

@@ -1,7 +1,9 @@
 {
-  "order": {
+  "orders": [
+{
+
     "order_date": "2017-04-05",
-    "tmp_order_id"
+    "tmp_order_id" : 3433,
     "company_id": 38,
     "buyer_contact_id": 77,
     "invoice_contact_id": 77,
@@ -24,5 +26,6 @@
     "order_status": "wait_manta_confirm",
     "show_to_brand": 1,
     "show_to_company": 0
-  }
+}
+  ]
 }

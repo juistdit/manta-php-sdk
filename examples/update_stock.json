@@ -1,0 +1,61 @@
+{
+  "products": [
+    {
+      "price": 5.95,
+      "sku": "SKLIGHTBOTTLE1",
+      "stock_item": {
+        "qty": 424,
+        "is_in_stock": true
+      }
+    },
+    {
+      "sku": "SKDMATCACTUS1",
+      "stock_item": {
+        "qty": 20,
+        "is_in_stock": true
+      }
+    },
+    {
+      "sku": "SKBOOKPLANT1",
+      "stock_item": {
+        "qty": 25,
+        "is_in_stock": false
+      }
+    },
+    {
+      "sku": "SKAPRONBBQ1",
+      "stock_item": {
+        "qty": 500000,
+        "is_in_stock": true
+      }
+    },
+    {
+      "sku": "SKANGLELIGHT1",
+      "stock_item": {
+        "qty": 424,
+        "is_in_stock": true
+      }
+    },
+    {
+      "sku": "SKBOHEAD1",
+      "stock_item": {
+        "qty": 20,
+        "is_in_stock": true
+      }
+    },
+    {
+      "sku": "SKCOFFEEDRIP1",
+      "stock_item": {
+        "qty": 25,
+        "is_in_stock": false
+      }
+    },
+    {
+      "sku": "SKSALADTEN1",
+      "stock_item": {
+        "qty": 10000000,
+        "is_in_stock": true
+      }
+    }
+  ]
+}
