@@ -17,6 +17,13 @@ class JsonResponse extends RestResponse
             $raw_body = $opts['raw_body'];
             //split header and body
             list($headers, $body) = explode("\r\n\r\n", $raw_body, 2);
+
+            /* Sometimes an extra header is send: HTTP/1.1 100 Continue */
+            json_decode($body);
+            if ( json_last_error() != JSON_ERROR_NONE) {
+                list($headers_1, $headers, $body) = explode("\r\n\r\n", $raw_body, 3);
+            };
+
             //parse headers
             $headers = explode("\r\n", $headers);
             //remove http/1.1 header

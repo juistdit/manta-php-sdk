@@ -60,8 +60,8 @@ abstract class RestResponse
             return $message;
             }
         else {
-            file_put_contents('/tmp/error',  var_export($this->body,true));
-            return "Something went wrong when communicating with the API";
+            file_put_contents('/tmp/error',  var_export($this->raw_body,true));
+            return "Something went wrong when communicating with the API. ERROR 1001";
 
         }
     }

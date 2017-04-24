@@ -461,11 +461,11 @@ class OrdersTest extends TestCase
     public function testCreateOrderBasic() {
         $session = $this->_session;
 
-        $requestBody = file_get_contents(__DIR__ . '/create_order_simple.json');
-        //$requestBody = file_get_contents(__DIR__ . '/create_order.json');
+        //$requestBody = file_get_contents(__DIR__ . '/create_order_simple.json');
+        $requestBody = file_get_contents(__DIR__ . '/create_order.json');
+        //$requestBody = file_get_contents(__DIR__ . '/create_order_one.json');
 
         $requestBodyArray = json_decode($requestBody);
-
 
         if ( !isset($requestBodyArray->orders[0]->company_id) || empty($requestBodyArray->orders[0]->company_id) ) {
             $this->fail('Create order json not valid, unexpected json object:' . var_export($requestBodyArray->orders,true));
@@ -475,6 +475,7 @@ class OrdersTest extends TestCase
 
 
         try {
+
             $createOrderResponse = $session->createOrder($requestBody);
 
             file_put_contents('/tmp/order_return', var_export($createOrderResponse,true));

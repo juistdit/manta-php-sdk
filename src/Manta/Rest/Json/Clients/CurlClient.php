@@ -27,6 +27,7 @@ class CurlClient extends AbstractClient
     }
 
     public function sendRequest($method, $url, array $headers = [], array $data = null){
+
         $curl = $this->_curl;
         $config = $this->_default_curl_config;
         //make it an non associative array
@@ -47,22 +48,29 @@ class CurlClient extends AbstractClient
         ] + $config;
         curl_setopt_array($curl, $config);
 
+
         if ( $this->_debug) {
-            echo '<br/>############# BEGIN DEBUG SENDING REQUEST #####################' . '<br/><br/>' ;
-            echo 'REQUEST METHOD:  ' .  $method . '<br/>' ;
-            echo 'API URL:  ' .  $url . '<br/>' ;
-            echo 'REQUEST HEADERS:  ' .   var_export($headers, true) . '<br/>' ;
-            echo 'REQUEST DATA:  ' .   var_export($data,true) . '<br/>' ;
-            echo '<br/>############# END DEBUG SENDING REQUEST #####################' . '<br/>' ;
+            echo PHP_EOL . '############# BEGIN DEBUG SENDING REQUEST #####################' . PHP_EOL . PHP_EOL ;
+            echo 'REQUEST METHOD:  ' .  $method . PHP_EOL ;
+            echo 'API URL:  ' .  $url . PHP_EOL ;
+            echo 'REQUEST HEADERS:  ' .   var_export($headers, true) . PHP_EOL ;
+            echo 'REQUEST DATA:  ' .   var_export($data,true) . PHP_EOL ;
+            echo PHP_EOL . '############# END DEBUG SENDING REQUEST #####################' . PHP_EOL ;
         }
 
         $content = curl_exec ($curl);
 
+        if ( $this->_debug) {
+            file_put_contents('/tmp/content-'. microtime(true), PHP_EOL . 'REAL RESPONSE: ' .  $content . PHP_EOL);
+        }
 
 
         if($content === false) {
             throw new RestException(curl_error($curl), curl_errno($curl));
         }
-        return new JsonResponse(['status' => curl_getinfo($curl, CURLINFO_HTTP_CODE), 'raw_body' => $content]);
+
+        $responseTemp = new JsonResponse(['status' => curl_getinfo($curl, CURLINFO_HTTP_CODE), 'raw_body' => $content]);
+
+        return $responseTemp;
     }
 }
