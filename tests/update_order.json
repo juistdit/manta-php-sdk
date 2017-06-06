@@ -1,12 +1,12 @@
 {
   "order": {
-    "order_id_brand": "order_id_brand_102",
+    "order_id_brand": "order_id_brand_101",
     "company_brand_code": "company_brand_code",
-    "company_order_reference": "company_order_reference_81",
+    "company_order_reference": "retailer1111",
     "brand_invoice_address_code": "brand_invoice_address_code_1001",
     "brand_delivery_address_code": "brand_delivery_address_code_1001",
     "brand_process_date": "2017-04-10",
-    "payment_terms": "45_days_net",
+    "payment_terms": "payment_in_advance",
     "payment_method": "sepa_direct_debit",
     "process": {
       "process_status": "SUCCESS",

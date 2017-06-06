@@ -60,7 +60,9 @@ $aConfigTemp['order_accessible_grand_total_minus_carriage'] = $aConfigTemp['orde
 
 /* Validate update order with get Order */
 
-$aConfigTemp['order_update_order_id'] = 81;
+$aConfigTemp['order_update_order_id'] = 612;
+
+$aConfigTemp['order_update_validate_advance'] = false;
 
 $aConfigTemp['order_update_company_brand_code'] = "company_brand_code_38";
 //$aConfigTemp['order_update_order_id_brand'] = "order_id_brand";

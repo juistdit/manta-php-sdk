@@ -1,0 +1,41 @@
+{
+  "shipment": {
+    "brand_shipment_id": "brand_shipment_id_1",
+    "shipment_date": "2017-05-24",
+    "order": {
+      "order_id": 773,
+      "order_id_brand": "order_id_brand_773",
+      "company_brand_code": "company_brand_code",
+      "company_order_reference": "company_order_reference_773",
+      "brand_process_date": "2017-05-24",
+      "process": {
+        "process_status": "SUCCESS",
+        "process_message": "Nothing"
+      }
+    },
+    "items": [
+      {
+        "qty": 600,
+        "sku": "SKNUTROBOTS1"
+      }
+    ],
+    "tracks": [
+      {
+        "created_at": "2017-05-22",
+        "updated_at": "2017-05-22",
+        "weight": 13,
+        "description": "this is the tracking description",
+        "track_number": "dhl4545484949",
+        "title": "dhl title",
+        "carrier_code": "DHL"
+      }
+    ],
+    "comments": {
+      "comment": "Here comes the shipment",
+      "notify": true,
+      "append_comment": true,
+      "is_visible_on_front": 0,
+      "extension_attributes": {}
+    }
+  }
+}

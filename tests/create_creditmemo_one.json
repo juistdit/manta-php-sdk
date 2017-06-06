@@ -1,0 +1,40 @@
+{
+  "creditmemo": {
+    "brand_creditmemo_id": "creditmemo_1009",
+    "creditmemo_date": "2017-06-01",
+    "refund_adjustment" : 0,
+    "refund_adjustment_fee" : 0,
+    "refund_shipping" : 0,
+    "total_discount" : 0,
+    "total_net": 0,
+    "total_vat": 0,
+    "total_gross": 0,
+    "order": {
+      "order_id": 1009,
+      "order_id_brand": "order_brand_1009",
+      "company_brand_code": "31JUIJUR01_FOUT",
+      "company_order_reference": "retailer_reference_1009",
+      "process": {
+        "process_status": "string",
+        "process_message": "string"
+      }
+    },
+    "items": [
+      {
+        "qty": 12,
+        "sku": "PLUGN-PRO-01-XXXX",
+        "price": 3.80,
+        "discount": 0,
+        "description": "Van de boot gevallen",
+        "row_total_net": 45.60,
+        "row_total_vat": 0,
+        "row_total_gross": 45.60,
+        "return_to_stock" : 12
+      }
+    ],
+    "comments":
+    {
+      "comment": "Sorry one package fell of the boat"
+    }
+  }
+}

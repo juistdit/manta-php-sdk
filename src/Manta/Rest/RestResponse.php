@@ -61,15 +61,17 @@ abstract class RestResponse
             }
         else {
             file_put_contents('/tmp/error',  var_export($this->raw_body,true));
-            return "Something went wrong when communicating with the API. ERROR 1001";
+            return "Something went wrong when communicating with the API. ERROR 1001:"  . var_export($this->raw_body);
 
         }
     }
 
-    public function asException() {
+    public function asException()
+    {
         $code = $this->status;
         $exception_type = $this->_getExceptionType();
         $message = $this->_getExceptionMessage();
         return new $exception_type($message, $code);
     }
+
 }

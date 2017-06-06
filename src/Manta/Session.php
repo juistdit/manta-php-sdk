@@ -87,4 +87,49 @@ class Session
         return $response->body;
     }
 
+    public function createInvoice($requestBodyJson='') {
+        $api = $this->_apiClient;
+        $token = $this->_token;
+        $resource = "brand/invoices/";
+        $requestBodyArray = json_decode($requestBodyJson,true);
+
+        $response = $api->POST($resource, $requestBodyArray, ['Authorization' => "Bearer $token"]);
+
+        if($response->isError()){
+            throw $response->asException();
+        }
+
+        return $response->body;
+    }
+
+    public function createShipment($requestBodyJson='') {
+        $api = $this->_apiClient;
+        $token = $this->_token;
+        $resource = "brand/shipment/";
+        $requestBodyArray = json_decode($requestBodyJson,true);
+
+        $response = $api->POST($resource, $requestBodyArray, ['Authorization' => "Bearer $token"]);
+
+        if($response->isError()){
+            throw $response->asException();
+        }
+
+        return $response->body;
+    }
+
+    public function createCreditMemo($requestBodyJson='') {
+        $api = $this->_apiClient;
+        $token = $this->_token;
+        $resource = "brand/creditmemo/";
+        $requestBodyArray = json_decode($requestBodyJson,true);
+
+        $response = $api->POST($resource, $requestBodyArray, ['Authorization' => "Bearer $token"]);
+
+        if($response->isError()){
+            throw $response->asException();
+        }
+
+        return $response->body;
+    }
+
 }

@@ -1,0 +1,57 @@
+{
+  "orders": [
+    {
+      "order_id_brand": "order_id_brand_101-2",
+      "tmp_order_id": 937834872,
+      "company_id": 38,
+      "buyer_contact_id": 36,
+      "invoice_contact_id": 36,
+      "delivery_contact_id": 77,
+      "invoice_address_id": 243,
+      "delivery_address_id": 167,
+      "brand_invoice_address_code": "brand_invoice_address_code_rocket",
+      "brand_delivery_address_code": "brand_delivery_address_code_rocket",
+      "shopcode": "fr",
+      "type" : "OC",
+      "po_attached" : "true",
+      "order_location": 3,
+      "employee_id": 1,
+      "payment_terms": "payment_in_advance",
+      "payment_method": "sepa_direct_debit",
+      "preferred_delivery_date": "2017-04-05",
+      "brand_discount": "15",
+      "carriage" : 100.15,
+      "comments": {
+        "comment": "This should be come an OC linked to PO",
+        "is_visible_on_front": 0
+      },
+      "order_item_details": [
+        {
+          "po_id": "572",
+          "items": [
+            {
+              "qty": 8,
+              "sku": "GUITR-PRO-01-REDWT",
+              "cancelled": 0,
+              "cancel_reason": "",
+              "price": 10.20,
+              "discount": 0
+            },
+            {
+              "qty": 30,
+              "sku": "WIRED-PRO-01-WHIYL",
+              "cancelled": 0,
+              "cancel_reason": "",
+              "price": 3.75,
+              "discount": 0,
+              "etd": "2017-05-19",
+              "brand_order_id": "bladielba"
+
+            }
+          ]
+        }
+      ],
+      "order_status": "new"
+    }
+  ]
+}

@@ -63,7 +63,7 @@ class OrdersTest extends TestCase
             $order = $session->getOrder($this->_config['order_with_access']);
             $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
 
-            file_put_contents('/tmp/order', var_export($order, true));
+            //file_put_contents('/tmp/order', var_export($order, true));
 
             $label = 'Company';
             $expected =  (isset($this->_config['order_accessible_company_name']) ) ? $this->_config['order_accessible_company_name'] : 'DONOTCHECK';
@@ -378,11 +378,16 @@ class OrdersTest extends TestCase
         $session = $this->_session;
 
         $requestBody = file_get_contents(__DIR__ . '/update_order.json');
+
          try {
             $updateOrderResponse = $session->updateOrder($this->_config['order_update_order_id'], $requestBody);
              $this->assertTrue($updateOrderResponse);
              $order = $session->getOrder($this->_config['order_update_order_id']);
              $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
+
+             if ( !isset($this->_config['order_update_validate_advance']) || !$this->_config['order_update_validate_advance'] ) {
+              return true;
+             }
 
              $message = '';
 
@@ -438,7 +443,7 @@ class OrdersTest extends TestCase
         $requestBody = file_get_contents(__DIR__ . '/update_order_error.json');
         try {
             $updateOrderResponse = $session->updateOrder($this->_config['order_with_access'], $requestBody);
-            file_put_contents('/tmp/failed', var_export($updateOrderResponse, true));
+           // file_put_contents('/tmp/failed', var_export($updateOrderResponse, true));
             $this->assertTrue($updateOrderResponse);
             $order = $session->getOrder($this->_config['order_with_access']);
             $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
@@ -462,8 +467,8 @@ class OrdersTest extends TestCase
         $session = $this->_session;
 
         //$requestBody = file_get_contents(__DIR__ . '/create_order_simple.json');
-        $requestBody = file_get_contents(__DIR__ . '/create_order.json');
-        //$requestBody = file_get_contents(__DIR__ . '/create_order_one.json');
+        //$requestBody = file_get_contents(__DIR__ . '/create_order.json');
+        $requestBody = file_get_contents(__DIR__ . '/create_order_one.json');
 
         $requestBodyArray = json_decode($requestBody);
 
@@ -478,9 +483,14 @@ class OrdersTest extends TestCase
 
             $createOrderResponse = $session->createOrder($requestBody);
 
-            file_put_contents('/tmp/order_return', var_export($createOrderResponse,true));
+            //file_put_contents('/tmp/order_return', var_export($createOrderResponse,true));
 
-            if ( !isset($createOrderResponse['orders'][0]['order_id']) || empty($createOrderResponse['orders'][0]['order_id']) ) {
+
+            if ( !isset($createOrderResponse['orders'][0]) || empty($createOrderResponse['orders'][0]) ) {
+                $this->fail('Order not created, unexpected response, order_id not correct:' . var_export($createOrderResponse,true));
+            }
+
+            if ( !isset($createOrderResponse['orders'][0]['order_ids'][0]['order_id']) || empty($createOrderResponse['orders'][0]['order_ids'][0]['order_id']) ) {
                 $this->fail('Order not created, unexpected response, order_id not correct:' . var_export($createOrderResponse,true));
             }
             if ( !isset($createOrderResponse['orders'][0]['tmp_order_id']) || empty($createOrderResponse['orders'][0]['tmp_order_id']) ) {
@@ -489,7 +499,7 @@ class OrdersTest extends TestCase
             }
             $this->assertTrue(true);
 
-            $orderId = $createOrderResponse['orders'][0]['order_id'];
+            $orderId = $createOrderResponse['orders'][0]['order_ids'][0]['order_id'];
 
             $order = $session->getOrder($orderId);
 
@@ -505,6 +515,147 @@ class OrdersTest extends TestCase
             }
 
 
+
+        } catch (\Manta\Exceptions\NoAccessException $e) {
+            $this->fail('No access');
+        }
+    }
+
+    public function testCreatePoOrderBasic() {
+        $session = $this->_session;
+
+        //$requestBody = file_get_contents(__DIR__ . '/create_order_simple.json');
+        //$requestBody = file_get_contents(__DIR__ . '/create_order.json');
+        $requestBody = file_get_contents(__DIR__ . '/create_oc_from_po_one.json');
+
+
+        $requestBodyArray = json_decode($requestBody);
+
+        if ( !isset($requestBodyArray->orders[0]->company_id) || empty($requestBodyArray->orders[0]->company_id) ) {
+            $this->fail('Create order json not valid, unexpected json object:' . var_export($requestBodyArray->orders,true));
+        }
+        $this->assertTrue(true);
+
+
+
+        try {
+            $createOrderResponse = $session->createOrder($requestBody);
+
+
+           // file_put_contents('/tmp/po_order_return', var_export($createOrderResponse,true));
+
+            if ( !isset($createOrderResponse['orders'][0]['order_ids'][0]['order_id']) || empty($createOrderResponse['orders'][0]['order_ids'][0]['order_id']) ) {
+                $this->fail('Order not created, unexpected response, order_id not correct:' . var_export($createOrderResponse,true));
+            }
+            if ( !isset($createOrderResponse['orders'][0]['tmp_order_id']) || empty($createOrderResponse['orders'][0]['tmp_order_id']) ) {
+                $this->assertTrue(false);
+                $this->fail('Order not created, unexpected response:' . var_export($createOrderResponse,true));
+            }
+            $this->assertTrue(true);
+
+            $orderId = $createOrderResponse['orders'][0]['order_id'];
+
+            if ( !empty($orderId)) {
+                $this->assertTrue(true);
+            }
+
+
+        } catch (\Manta\Exceptions\NoAccessException $e) {
+            $this->fail('No access');
+        }
+    }
+
+    public function testCreateInvoiceBasic() {
+        $session = $this->_session;
+
+        $requestBody = file_get_contents(__DIR__ . '/create_invoice_one.json');
+        $requestBodyArray = json_decode($requestBody);
+
+        if ( !isset($requestBodyArray->invoice->order->order_id) || empty($requestBodyArray->invoice->order->order_id) ) {
+            if ( !isset($requestBodyArray->invoice->order->order_id_brand) || empty($requestBodyArray->invoice->order->order_id_brand) ) {
+                $this->fail('Create invoice json not valid, unexpected json object:' . var_export($requestBodyArray->invoice,true));
+            }
+
+        }
+        $this->assertTrue(true);
+
+
+
+        try {
+
+            $createInvoiceResponse = $session->createInvoice($requestBody);
+
+            //file_put_contents('/tmp/order_return', var_export($createInvoiceResponse,true));
+
+            if ( !isset($createInvoiceResponse['orders'][0]['order_id']) || empty($createInvoiceResponse['orders'][0]['order_id']) ) {
+                $this->fail('Order not created, unexpected response, order_id not correct:' . var_export($createInvoiceResponse,true));
+            }
+            if ( !isset($createInvoiceResponse['orders'][0]['tmp_order_id']) || empty($createInvoiceResponse['orders'][0]['tmp_order_id']) ) {
+                $this->assertTrue(false);
+                $this->fail('Order not created, unexpected response:' . var_export($createInvoiceResponse,true));
+            }
+            $this->assertTrue(true);
+
+            $orderId = $createInvoiceResponse['orders'][0]['order_id'];
+
+            $order = $session->getOrder($orderId);
+
+            $this->assertInstanceOf(\Manta\DataObjects\Objects\Order::class, $order);
+
+        } catch (\Manta\Exceptions\NoAccessException $e) {
+            $this->fail('No access');
+        }
+    }
+
+
+    public function testCreateShipmentBasic() {
+        $session = $this->_session;
+
+        $requestBody = file_get_contents(__DIR__ . '/create_shipment_one.json');
+        $requestBodyArray = json_decode($requestBody);
+
+
+        if ( !isset($requestBodyArray->shipment->shipment_date) || empty($requestBodyArray->shipment->shipment_date) ) {
+            $this->fail('Create shipment json not valid, unexpected json object:' . var_export($requestBody,true));
+        }
+        $this->assertTrue(true);
+
+
+
+        try {
+
+            $createShipmentResponse = $session->createShipment($requestBody);
+
+            //file_put_contents('/tmp/shipment_return', var_export($createShipmentResponse,true));
+
+            $this->assertTrue(true);
+
+
+        } catch (\Manta\Exceptions\NoAccessException $e) {
+            $this->fail('No access');
+        }
+    }
+
+
+    public function testCreateCreditMemoBasic() {
+        $session = $this->_session;
+
+        $requestBody = file_get_contents(__DIR__ . '/create_creditmemo_one.json');
+        $requestBodyArray = json_decode($requestBody);
+
+
+        if ( !isset($requestBodyArray->creditmemo->creditmemo_date) || empty($requestBodyArray->creditmemo->creditmemo_date) ) {
+            $this->fail('Create creditmemo json not valid, unexpected json object:' . var_export($requestBody,true));
+        }
+        $this->assertTrue(true);
+
+        try {
+
+            $createCreditMemoResponse = $session->createCreditMemo($requestBody);
+
+            //file_put_contents('/tmp/creditmemo_return', var_export($createCreditMemoResponse,true));
+
+            $this->assertTrue(true);
 
         } catch (\Manta\Exceptions\NoAccessException $e) {
             $this->fail('No access');

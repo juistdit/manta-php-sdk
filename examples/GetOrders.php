@@ -23,6 +23,7 @@ $status_1='new';
 //$status_2='complete';
 
 $oOrders = $session->getOrders()->statusIn([$status_1]);
+
 //$oOrders = $session->getOrders()->statusIn([$status_1, $status_2]);
 foreach ($oOrders as $oOrder) {
     echo "<hr/><br/>";
